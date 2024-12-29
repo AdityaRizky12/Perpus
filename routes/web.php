@@ -22,5 +22,10 @@ Route::get('/', function () {
 // Menambahkan rute autentikasi (login, register, dll)
 Auth::routes();
 
-// Rute untuk halaman home setelah login
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/catalog', [App\Http\Controllers\CatalogController::class, 'index']);
+Route::get('/publisher', [App\Http\Controllers\PublisherController::class, 'index']);
+Route::get('/author', [App\Http\Controllers\AuthorController::class, 'index']);
+Route::get('/member', [App\Http\Controllers\MemberController::class, 'index']);
+Route::get('/book', [App\Http\Controllers\BookController::class, 'index']);
