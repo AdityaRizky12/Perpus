@@ -30,11 +30,11 @@ class HomeController extends Controller
     {
         //$members = Member::with('user')->get();
 
-        //$books = Book::with('publisher')->get();
+        $books = Book::with('publisher' ,'catalog')->get();
         //$catalog = Catalog::with('books')->get();
        //$author = Author::with('books')->get();
-       $publisher = Publisher::with('books')->get();
-        return $publisher;
+       //$publisher = Publisher::with('books')->get();
+        return $books;
         
         return view('home');
     }
