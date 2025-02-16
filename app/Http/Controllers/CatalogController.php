@@ -27,7 +27,7 @@ class CatalogController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.catalog.create');
     }
 
     /**
@@ -38,7 +38,23 @@ class CatalogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //$catalog = new Catalog;
+        //$catalog->name = $request->name;
+        //$catalog->save();
+
+       // Catalog::create($request->all());
+
+       $this->validate($request, [
+        'name' => ['required'],
+       ]);
+
+    Catalog::create([
+        'name' => $request->name,
+        'title' => $request->title ?? 'Untitled',
+        'language' => $request->language ?? 'English', // Beri default jika kosong
+    ]);
+
+        return redirect('catalog');
     }
 
     /**
@@ -60,7 +76,7 @@ class CatalogController extends Controller
      */
     public function edit(Catalog $catalog)
     {
-        //
+        return view('admin.catalog.edit', compact('catalog'));
     }
 
     /**
@@ -72,7 +88,17 @@ class CatalogController extends Controller
      */
     public function update(Request $request, Catalog $catalog)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required'],
+           ]);
+    
+        $catalog->update([
+            'name' => $request->name,
+            'title' => $request->title ?? 'Untitled',
+            'language' => $request->language ?? 'English', // Beri default jika kosong
+        ]);
+    
+            return redirect('catalog');
     }
 
     /**
@@ -83,6 +109,8 @@ class CatalogController extends Controller
      */
     public function destroy(Catalog $catalog)
     {
-        //
+        $catalog->delete();
+
+        return redirect('catalog');
     }
 }
